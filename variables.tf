@@ -31,3 +31,11 @@ variable "subnets" {
   }))
   description = "キーはサブネット名、az_suffixはAZ指定、usageはタグに使用されます。"
 }
+
+variable "instance_type" {
+  type = string
+}
+
+variable "ami_id" {
+  type = string
+}

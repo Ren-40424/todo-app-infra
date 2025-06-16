@@ -12,3 +12,13 @@ module "subnet" {
   subnets      = var.subnets
   igw_id       = module.vpc.igw_id
 }
+
+module "ec2" {
+  source        = "./modules/ec2"
+  project_name  = var.project_name
+  subnet_ids    = module.subnet.ids_by_usage["ec2"]
+  instance_type = var.instance_type
+  ami_id        = var.ami_id
+  vpc_id        = module.vpc.id
+  alb_sg_id     = "dummy"
+}
