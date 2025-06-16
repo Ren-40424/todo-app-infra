@@ -4,6 +4,13 @@ terraform {
       version = ">=5.94.0"
     }
   }
+
+  backend "s3" {
+    bucket  = var.backend_bucket_name
+    region  = var.aws_region
+    key     = "env/${var.environment}/terraform.tfstate"
+    encrypt = true
+  }
 }
 
 provider "aws" {

@@ -13,3 +13,7 @@ variable "environment" {
 variable "owner" {
   type = string
 }
+
+variable "backend_bucket_name" {
+  type = string
+}
