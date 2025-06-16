@@ -5,6 +5,7 @@ resource "aws_subnet" "this" {
   cidr_block              = each.value.cidr_block
   availability_zone       = "${var.aws_region}${each.value.az_suffix}"
   map_public_ip_on_launch = each.value.public ? true : false
+
   tags = {
     Name  = "${var.project_name}-subnet-${each.key}"
     AZ    = each.value.az_suffix
