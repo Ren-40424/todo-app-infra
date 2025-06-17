@@ -44,9 +44,9 @@ resource "aws_db_instance" "this" {
 }
 
 module "sg" {
-  source = "../security_group"
+  source       = "../security_group"
   project_name = var.project_name
-  vpc_id = var.vpc_id
+  vpc_id       = var.vpc_id
 
   rule_map = {
     allow_mysql_from_ec2 = {
