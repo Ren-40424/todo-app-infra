@@ -49,3 +49,16 @@ variable "alb_health_check_matcher" {
   type    = string
   default = "200"
 }
+
+variable "db_instance_class" {
+  type    = string
+  default = "db.t3.micro"
+}
+
+variable "db_username" {
+  type = string
+}
+
+variable "db_name" {
+  type = string
+}
