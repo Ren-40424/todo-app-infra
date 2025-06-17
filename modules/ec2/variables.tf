@@ -3,7 +3,7 @@ variable "project_name" {
 }
 
 variable "subnet_ids" {
-  type = list(string)
+  type = map(string)
 }
 
 variable "instance_type" {

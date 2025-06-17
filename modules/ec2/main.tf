@@ -1,5 +1,5 @@
-resource "aws_instance" "backend" {
-  for_each = toset(var.subnet_ids)
+resource "aws_instance" "this" {
+  for_each = var.subnet_ids
 
   subnet_id              = each.value
   instance_type          = var.instance_type
