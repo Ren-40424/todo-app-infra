@@ -4,6 +4,7 @@ resource "aws_instance" "this" {
   subnet_id              = each.value
   instance_type          = var.instance_type
   ami                    = var.ami_id
+  iam_instance_profile   = var.iam_instance_profile
   vpc_security_group_ids = [module.sg.id]
 
   tags = {

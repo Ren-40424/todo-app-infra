@@ -13,14 +13,20 @@ module "subnet" {
   igw_id       = module.vpc.igw_id
 }
 
+module "iam_instance_profile" {
+  source       = "./modules/iam_instance_profile"
+  project_name = var.project_name
+}
+
 module "ec2" {
-  source        = "./modules/ec2"
-  project_name  = var.project_name
-  subnet_ids    = module.subnet.ids_by_usage["ec2"]
-  instance_type = var.instance_type
-  ami_id        = var.ami_id
-  vpc_id        = module.vpc.id
-  alb_sg_id     = module.alb.sg_id
+  source               = "./modules/ec2"
+  project_name         = var.project_name
+  subnet_ids           = module.subnet.ids_by_usage["ec2"]
+  instance_type        = var.instance_type
+  ami_id               = var.ami_id
+  vpc_id               = module.vpc.id
+  alb_sg_id            = module.alb.sg_id
+  iam_instance_profile = module.iam_instance_profile.name
 }
 
 module "alb" {
