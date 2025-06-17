@@ -20,5 +20,16 @@ module "ec2" {
   instance_type = var.instance_type
   ami_id        = var.ami_id
   vpc_id        = module.vpc.id
-  alb_sg_id     = "dummy"
+  alb_sg_id     = module.alb.sg_id
+}
+
+module "alb" {
+  source               = "./modules/alb"
+  project_name         = var.project_name
+  vpc_id               = module.vpc.id
+  subnet_ids           = module.subnet.ids_by_usage["alb"]
+  health_check_path    = var.alb_health_check_path
+  health_check_matcher = var.alb_health_check_matcher
+  instance_ids         = module.ec2.instance_ids
+  ec2_sg_id            = module.ec2.sg_id
 }

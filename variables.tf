@@ -29,7 +29,7 @@ variable "subnets" {
     az_suffix  = string
     usage      = string
   }))
-  description = "キーはサブネット名、az_suffixはAZ指定、usageはタグに使用されます。"
+  description = "キーはサブネット名、az_suffixはAZ指定、usageはタグやフィルタ条件に使用されます。"
 }
 
 variable "instance_type" {
@@ -38,4 +38,14 @@ variable "instance_type" {
 
 variable "ami_id" {
   type = string
+}
+
+variable "alb_health_check_path" {
+  type    = string
+  default = "/"
+}
+
+variable "alb_health_check_matcher" {
+  type    = string
+  default = "200"
 }
