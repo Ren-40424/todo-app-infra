@@ -21,7 +21,7 @@ variable "health_check_matcher" {
 }
 
 variable "instance_ids" {
-  type = map
+  type = map(string)
 }
 
 variable "ec2_sg_id" {
