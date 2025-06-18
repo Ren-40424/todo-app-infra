@@ -51,3 +51,27 @@ module "rds" {
   vpc_id         = module.vpc.id
   ec2_sg_id      = module.ec2.sg_id
 }
+
+module "s3" {
+  source      = "./modules/s3"
+  bucket_name = var.app_bucket_name
+}
+
+module "cloudfront" {
+  source                         = "./modules/cloudfront"
+  project_name                   = var.project_name
+  domain_name                    = var.domain_name
+  app_default_root_object        = var.app_default_root_object
+  s3_bucket_regional_domain_name = module.s3.app_bucket_regional_domain_name
+  route53_zone_id                = var.route53_zone_id
+  cf_cert_arn                    = module.acm.cf_cert_arn
+}
+
+module "acm" {
+  source          = "./modules/acm"
+  project_name    = var.project_name
+  environment     = var.environment
+  owner           = var.owner
+  domain_name     = var.domain_name
+  route53_zone_id = var.route53_zone_id
+}
