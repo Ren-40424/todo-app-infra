@@ -78,3 +78,15 @@ variable "domain_name" {
 variable "route53_zone_id" {
   type = string
 }
+
+variable "api_project_path" {
+  type = string
+}
+
+variable "user_pool_id" {
+  type = string
+}
+
+variable "api_allowed_host" {
+  type = string
+}

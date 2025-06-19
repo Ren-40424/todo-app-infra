@@ -1,10 +1,10 @@
 locals {
-  db_secrets_version = 1
+  db_secrets_version = 2
 }
 
 ephemeral "random_password" "db_password" {
   length           = 16
-  override_special = "!#$%*()-_=+[]{}<>:?"
+  override_special = "!$%*()-_=+[]{}<>:?"
 }
 
 resource "aws_ssm_parameter" "db_password" {

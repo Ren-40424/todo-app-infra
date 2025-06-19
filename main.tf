@@ -27,6 +27,14 @@ module "ec2" {
   vpc_id               = module.vpc.id
   alb_sg_id            = module.alb.sg_id
   iam_instance_profile = module.iam_instance_profile.name
+  db_name              = var.db_name
+  db_username          = var.db_username
+  db_address           = module.rds.address
+  aws_region           = var.aws_region
+  environment          = var.environment
+  api_project_path     = var.api_project_path
+  user_pool_id         = var.user_pool_id
+  api_allowed_host     = var.api_allowed_host
 }
 
 module "alb" {
@@ -34,9 +42,12 @@ module "alb" {
   project_name         = var.project_name
   vpc_id               = module.vpc.id
   subnet_ids           = module.subnet.ids_by_usage["alb"]
+  certificate_arn      = module.acm.alb_cert_arn
   health_check_path    = var.alb_health_check_path
   health_check_matcher = var.alb_health_check_matcher
   instance_ids         = module.ec2.instance_ids
+  route53_zone_id      = var.route53_zone_id
+  domain_name          = var.domain_name
   ec2_sg_id            = module.ec2.sg_id
 }
 
